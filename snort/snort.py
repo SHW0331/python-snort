@@ -32,13 +32,15 @@ def delete_snort() :
     sid = input('Enter snort rule sid : ')
     file_path = '/etc/snort/rules/local.rules'
 
-    # vi를 호출하여 파일 열기
+    # subprocess의 popen 함수를 사용해, vi 편집기를 실행
+    # stdin, stdout, stderr 함수는 함수를 호출할 때 사용되는 인자이다.
+    # 프로세스의 표준 입력, 표준 출력, 표준 오류를 어떻게 다룰지를 지정.
     process = subprocess.Popen(['vi', file_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # vi가 열리면 문자열 검색 및 삭제 명령어 실행
     commands = [
-        f'/{sid}\n',   # 검색 명령어
-        'dd',                   # 현재 행 삭제 명령어
+        f'/{sid}\n',             # 검색 명령어
+        'dd',                    # 현재 행 삭제 명령어
         ':wq\n',                 # 저장 및 종료 명령어
     ]
 
