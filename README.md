@@ -8,7 +8,17 @@ I created it to learn more about Snort. Thank you.
 
 
 
-### wget link
+# wget link
 ```
 wget https://raw.githubusercontent.com/SHW0331/python-snort/main/snort.tar
+```
+
+# .tar extract
+```
+tar -xvf snort.tar
+```
+
+# snort.py instructions
+```
+python3 snort.py
 ```
