@@ -34,7 +34,7 @@ def modify_snort(path) :
         1
     else:
         modify = input("Enter the contents : ")
-        
+
     # [6]= dst_port 까지 저장.
     rule_parts = original_content.split()
 
@@ -103,24 +103,30 @@ def modify_snort(path) :
         #     if(options_item == options_name[i])
 
     else:
-        1
-    print('\nThe rule has been modified.')
-    print(modify_rule)
+        select = -1
+        print("Entered it incorrectly.")
+    
 
-    # 기존 rule 삭제 후, modify_rule 추가
-    process = subprocess.Popen(['vi', path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if(select == -1):
+        print("Please select an option between 1 and 8.")
+    else:
+        print('\nThe rule has been modified.')
+        print(modify_rule)
 
-        # vi가 열리면 문자열 검색 및 삭제 명령어 실행
-    commands = [
-        f'/{sid}\n',             # 검색 명령어
-        'dd',                    # 현재 행 삭제 명령어
-        ':wq\n',                 # 저장 및 종료 명령어
-    ]
+        # 기존 rule 삭제 후, modify_rule 추가
+        process = subprocess.Popen(['vi', path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    for command in commands:
-        process.stdin.write(command.encode())
-        process.stdin.flush()
-    process.wait()
+            # vi가 열리면 문자열 검색 및 삭제 명령어 실행
+        commands = [
+            f'/sid:{sid};\n',             # 검색 명령어
+            'dd',                    # 현재 행 삭제 명령어
+            ':wq\n',                 # 저장 및 종료 명령어
+        ]
 
-    with open(path, "a") as file:
-        file.write(modify_rule)
+        for command in commands:
+            process.stdin.write(command.encode())
+            process.stdin.flush()
+        process.wait()
+
+        with open(path, "a") as file:
+            file.write(modify_rule)

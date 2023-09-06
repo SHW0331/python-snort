@@ -10,7 +10,7 @@ def delete_snort(path) :
 
     # vi가 열리면 문자열 검색 및 삭제 명령어 실행
     commands = [
-        f'/{sid}\n',             # 검색 명령어
+        f'/sid:{sid};\n',             # 검색 명령어
         'dd',                    # 현재 행 삭제 명령어
         ':wq\n',                 # 저장 및 종료 명령어
     ]

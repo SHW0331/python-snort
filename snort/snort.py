@@ -3,7 +3,6 @@ import modify as md
 import delete as dele
 import create as crt
 
-# snort restart
 file_path = '/etc/snort/rules/local.rules'
 
 select = input('Enter the snort action (create, delete, modify) : ')
